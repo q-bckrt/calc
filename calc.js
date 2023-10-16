@@ -1,9 +1,11 @@
-const currDisplayedValue = document.getElementById("curr-value");
+//currently displayed value
+const dspValue = document.getElementById("curr-value");
+//all calculator buttons
 const btnList = document.getElementsByClassName("btn");
 
 let lValue = null;
 let rValue = null;
-let numbersDisplayed = 0;
+let charsOnScreen = 0;
 let solved = 0;
 
 let operator = '';
@@ -14,14 +16,14 @@ function assignInputs(input) {
         case '-':
         case '/':
         case '*':
-            currDisplayedValue.textContent = '';
+            dspValue.textContent = '';
             if (lValue != null && rValue != null) {
                 operate();
             }
             lValue = rValue;
             rValue = null;
             operator = input;
-            numbersDisplayed = 0;
+            charsOnScreen = 0;
             
             break;
         case '=':
@@ -33,17 +35,24 @@ function assignInputs(input) {
             clear();
             break;
         case 'chs':
+            if (rValue > 0) {
+                dspValue.textContent = '-' + dspValue.textContent;
+
+            } else {
+                dspValue.textContent = dspValue.textContent.substring(1);
+            }
+            rValue *= -1;
             break;
         default:
             console.log("solved: ", solved);
             if (solved == 1) {
-                currDisplayedValue.textContent = '';
+                dspValue.textContent = '';
                 solved = 0;
             }
-            if (numbersDisplayed <= 12) {
-                currDisplayedValue.textContent += input;
-                rValue = parseFloat(currDisplayedValue.textContent);
-                numbersDisplayed++;
+            if (charsOnScreen <= 12) {
+                dspValue.textContent += input;
+                rValue = parseFloat(dspValue.textContent);
+                charsOnScreen++;
             }
     } 
 }
@@ -67,7 +76,7 @@ function operate() {
     }
     lValue = null;
     console.log(rValue);
-    currDisplayedValue.textContent = rValue.toString();
+    dspValue.textContent = rValue.toString();
     console.log(rValue);
     operator = '';
     solved = 1;
@@ -77,8 +86,8 @@ function clear() {
     lValue = null;
     rValue = null;
     operator = '';
-    numbersDisplayed = 0;
-    currDisplayedValue.textContent = '';
+    charsOnScreen = 0;
+    dspValue.textContent = '';
 }
 
 function manageInputs(e) {
