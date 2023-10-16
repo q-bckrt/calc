@@ -4,6 +4,7 @@ const btnList = document.getElementsByClassName("btn");
 let lValue = null;
 let rValue = null;
 let numbersDisplayed = 0;
+let solved = 0;
 
 let operator = '';
 
@@ -13,14 +14,13 @@ function assignInputs(input) {
         case '-':
         case '/':
         case '*':
+            currDisplayedValue.textContent = '';
             if (lValue != null && rValue != null) {
-                console.log("operate from operator");
                 operate();
             }
             lValue = rValue;
             rValue = null;
             operator = input;
-            currDisplayedValue.textContent = '';
             numbersDisplayed = 0;
             
             break;
@@ -35,6 +35,11 @@ function assignInputs(input) {
         case 'chs':
             break;
         default:
+            console.log("solved: ", solved);
+            if (solved == 1) {
+                currDisplayedValue.textContent = '';
+                solved = 0;
+            }
             if (numbersDisplayed <= 12) {
                 currDisplayedValue.textContent += input;
                 rValue = parseFloat(currDisplayedValue.textContent);
@@ -44,7 +49,6 @@ function assignInputs(input) {
 }
 
 function operate() {
-
     switch (operator) {
         case '+':
             rValue = lValue + rValue;
@@ -62,8 +66,11 @@ function operate() {
             break;
     }
     lValue = null;
+    console.log(rValue);
     currDisplayedValue.textContent = rValue.toString();
+    console.log(rValue);
     operator = '';
+    solved = 1;
 }
 
 function clear() {
@@ -85,4 +92,3 @@ function manageInputs(e) {
 [...btnList].forEach(e => {
     e.addEventListener('click', manageInputs);
 });
-
