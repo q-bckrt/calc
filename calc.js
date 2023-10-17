@@ -35,7 +35,19 @@ function assignInputs(input) {
                 operate();
             }
             break;
+        case 'bsp':
+            if (charsOnScreen > 0) {
+                dspValue.textContent = dspValue.textContent.slice(0, -1);
+                rValue = parseFloat(dspValue.textContent);
+                console.log(rValue);
+                if (isNaN(rValue)) {
+                    rValue = null;
+                }
+                charsOnScreen--;
+                }
+            break;
         case 'clr':
+            console.log("CLR");
             clear();
             break;
         case 'chs':

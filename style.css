@@ -9,6 +9,7 @@
     --c-shade-d: #807e81;
     --c-accnt-o: #F58731;
     --c-accnt-b: #04AEF0;
+    --c-accnt-c: #E0635D;
 }
 
 html {
@@ -99,7 +100,6 @@ body {
     align-items: center;
     font-size: 24px;
     height: 70px;
-    width: 186px;
     margin-bottom: 12px;
     border: 4px solid var(--c-shade-a);
     border-radius: 8px;
@@ -108,12 +108,18 @@ body {
 
 .btn-ta {
     background: var(--c-accnt-o);
+    width: 186px;
 }
 
 .btn-tb {
     background: var(--c-accnt-b);
+    width: 80px;
 }
 
+.btn-tc {
+    background: var(--c-accnt-c);
+    width: 80px;
+}
 
 .btn-bod {
     display: flex;
