@@ -7,10 +7,14 @@ let lValue = null;
 let rValue = null;
 let charsOnScreen = 0;
 let solved = 0;
+let decimal = 0;
 
 let operator = '';
 
 function assignInputs(input) {
+    if (rValue == null) {
+        decimal = 0;
+    }
     switch (input) {
         case '+':
         case '-':
@@ -27,9 +31,9 @@ function assignInputs(input) {
             
             break;
         case '=':
-            operate();
-            break;
-        case '.':
+            if (lValue != null && rValue != null) {
+                operate();
+            }
             break;
         case 'clr':
             clear();
@@ -44,7 +48,14 @@ function assignInputs(input) {
             rValue *= -1;
             break;
         default:
-            console.log("solved: ", solved);
+            if (input == '.' && decimal == 1) {
+                console.log("decimal alread used");
+                break;    
+            }
+            if (input == '.' && decimal == 0) {
+                console.log("decimal new");
+                decimal = 1;
+            }
             if (solved == 1) {
                 dspValue.textContent = '';
                 solved = 0;
@@ -76,9 +87,10 @@ function operate() {
     }
     lValue = null;
     console.log(rValue);
-    dspValue.textContent = rValue.toString();
+    dspValue.textContent = rValue.toString().substring(0, 12);
     console.log(rValue);
     operator = '';
+    decimal = 0;
     solved = 1;
 }
 
