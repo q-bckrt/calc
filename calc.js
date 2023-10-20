@@ -11,6 +11,9 @@ let decimal = 0;
 
 let operator = '';
 
+
+//(FIX BSP: )
+//bsp function must act on lValue if there is one and rValue is empty
 function assignInputs(input) {
     if (rValue == null) {
         decimal = 0;
@@ -27,7 +30,6 @@ function assignInputs(input) {
             lValue = rValue;
             rValue = null;
             operator = input;
-            charsOnScreen = 0;
             
             break;
         case '=':
@@ -36,7 +38,9 @@ function assignInputs(input) {
             }
             break;
         case 'bsp':
+                console.log("BSP RDY!");
             if (charsOnScreen > 0) {
+                console.log("BSP ON!");
                 dspValue.textContent = dspValue.textContent.slice(0, -1);
                 rValue = parseFloat(dspValue.textContent);
                 console.log(rValue);
@@ -78,6 +82,8 @@ function assignInputs(input) {
                 charsOnScreen++;
             }
     } 
+    charsOnScreen = dspValue.textContent.length;
+    console.log("CHARS: ", charsOnScreen);
 }
 
 function operate() {
