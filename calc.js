@@ -11,9 +11,7 @@ let operator = '';
 
 
 function assignInputs(input) {
-    if (rValue == null) {
-        decimal = 0;
-    }
+    if (rValue == null) decimal = 0;
     switch (input) {
         case '+':
         case '-':
@@ -30,17 +28,13 @@ function assignInputs(input) {
             
             break;
         case '=':
-            if (lValue != null && rValue != null) {
-                operate();
-            }
+            if (lValue != null && rValue != null) operate();
             break;
         case 'bsp':
             if (charsOnScreen > 0) {
                 dspValue.textContent = dspValue.textContent.slice(0, -1);
                 rValue = parseFloat(dspValue.textContent);
-                if (isNaN(rValue)) {
-                    rValue = null;
-                }
+                if (isNaN(rValue)) rValue = null;
                 charsOnScreen--;
                 }
             break;
@@ -50,19 +44,15 @@ function assignInputs(input) {
         case 'chs':
             if (rValue > 0) {
                 dspValue.textContent = '-' + dspValue.textContent;
-
-            } else {
+            }
+            else {
                 dspValue.textContent = dspValue.textContent.substring(1);
             }
             rValue *= -1;
             break;
         default:
-            if (input == '.' && decimal == 1) {
-                break;    
-            }
-            if (input == '.' && decimal == 0) {
-                decimal = 1;
-            }
+            if (input == '.' && decimal == 1) break;    
+            if (input == '.' && decimal == 0) decimal = 1;
             if (solved == 1) {
                 dspValue.textContent = '';
                 solved = 0;
